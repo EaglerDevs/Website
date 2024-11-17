@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - EaglerDevs</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- EmailJS script -->
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // Initialize EmailJS with your actual User ID
+        (function() {
+            emailjs.init('l5P4AR-uhqlZJ99SJ');  // Replace with your actual EmailJS User ID
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="nav-bar">
+            <div class="logo">EaglerDevs</div>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="mods.html">Mods</a></li>
+                <li><a href="texturepacks.html">Texture Packs</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Contact Hero Section -->
+    <section class="hero">
+        <h1>Contact EaglerDevs</h1>
+        <p>Have any questions, feedback, or want to join the team? Get in touch with us!</p>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact-form" class="section">
+        <h2>Send Us a Message</h2>
+        <form id="form" action="#" method="post">
+            <div class="form-group">
+                <label for="from_name">Your Name</label>
+                <input type="text" name="from_name" id="from_name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="reply_to">Your Email</label>
+                <input type="email" name="reply_to" id="reply_to" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea name="message" id="message" placeholder="Write your message here" rows="6" required></textarea>
+            </div>
+
+            <input type="submit" id="button" value="Send Message" class="cta-button">
+        </form>
+        <div id="form-status"></div> <!-- Display success/error messages -->
+    </section>
+
+    <!-- Social Media Section -->
+    <section id="social-media" class="section">
+        <h2>Follow Us</h2>
+        <p>Stay up to date with our latest projects and developments.</p>
+        <div class="social-icons">
+            <a href="https://github.com/EaglerDevs" target="_blank">
+                <img src="assets/github-icon.png" alt="GitHub">
+            </a>
+            <a href="https://youtube.com/@BqrnMC" target="_blank">
+                <img src="assets/eaglerdevs.png" alt="EaglerDevs">
+            </a>
+            <a href="https://discord.gg/EaglerDevs" target="_blank">
+                <img src="assets/discord-icon.png" alt="Discord">
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 EaglerDevs. All rights reserved. | <a href="https://github.com/EaglerDevs" target="_blank" class="highlight">GitHub</a></p>
+    </footer>
+
+    <script type="text/javascript">
+        const btn = document.getElementById('button');
+
+        document.getElementById('form').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent default form submission
+
+            btn.value = 'Sending...';  // Change button text to indicate sending
+
+            const serviceID = 'default_service';  // Replace with your actual EmailJS service ID
+            const templateID = 'template_ngnhno3';  // Replace with your actual EmailJS template ID
+
+            // Send form data to EmailJS using sendForm
+            emailjs.sendForm(serviceID, templateID, this)
+                .then(() => {
+                    btn.value = 'Send Message';  // Restore button text
+                    document.getElementById('form-status').innerHTML = 'Message sent successfully! Thank you for reaching out.';  // Success message
+                    document.getElementById('form').reset();  // Reset the form
+                }, (err) => {
+                    btn.value = 'Send Message';  // Restore button text
+                    document.getElementById('form-status').innerHTML = 'Oops! Something went wrong. Please try again later.';  // Error message
+                    console.error('Error sending email:', err);  // Log error for debugging
+                });
+        });
+    </script>
+</body>
+</html>
